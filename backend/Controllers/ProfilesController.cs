@@ -62,7 +62,7 @@ namespace backend.Controllers
     }
 
     [HttpGet("{id}/following")]
-    public ActionResult<IEnumerable<Following>> GetFollowing(string id)
+    public ActionResult<List<IEnumerable<Post>>> GetFollowing(string id)
     {
       try
       {

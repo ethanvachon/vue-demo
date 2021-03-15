@@ -12,10 +12,13 @@ namespace backend.Services
 
     private readonly ProfilesRepository _prepo;
 
-    public FollowingService(FollowingRepository repo, ProfilesRepository prepo)
+    private readonly PostsRepository _porepo;
+
+    public FollowingService(FollowingRepository repo, ProfilesRepository prepo, PostsRepository porepo)
     {
       _repo = repo;
       _prepo = prepo;
+      _porepo = porepo;
     }
 
     internal Following Create(Following newFollowing, Profile userinfo)
@@ -28,7 +31,7 @@ namespace backend.Services
       }
       if (following == null)
       {
-        throw new Exception("invalid folllowing Id");
+        throw new Exception("invalid following Id");
       }
       newFollowing.CreatorId = userinfo.Id;
       _repo.Create(newFollowing);
@@ -46,9 +49,16 @@ namespace backend.Services
       _repo.Delete(UserId);
     }
 
-    internal IEnumerable<Following> GetByProfile(string id)
+    internal List<IEnumerable<Post>> GetByProfile(string id)
     {
-      return _repo.GetByProfile(id);
+      IEnumerable<Following> profiles = _repo.GetByProfile(id);
+      List<IEnumerable<Post>> posts = new List<IEnumerable<Post>>();
+      foreach (Following profile in profiles)
+      {
+        posts.Add(_porepo.GetByProfile(profile.FollowingId));
+      }
+      return posts;
+
     }
   }
 }

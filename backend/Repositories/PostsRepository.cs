@@ -56,7 +56,7 @@ namespace backend.Repositories
       _db.Execute(sql, new { id });
     }
 
-    internal object GetByProfile(string id)
+    internal IEnumerable<Post> GetByProfile(string id)
     {
       string sql = @"
       SELECT
