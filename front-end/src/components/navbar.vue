@@ -2,11 +2,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img
-          alt="logo"
-          src="../assets/img/cw-logo.png"
-          height="45"
-        />
       </div>
     </router-link>
     <button
@@ -28,7 +23,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'About' }" class="nav-link">
+          <router-link :to="{ name: 'Profiles' }" class="nav-link">
             About
           </router-link>
         </li>

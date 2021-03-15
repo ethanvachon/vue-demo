@@ -11,6 +11,15 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+
+  async getProfiles() {
+    try {
+      const res = await api.get('/api/profiles')
+      AppState.accounts = res.data
+    } catch (err) {
+      logger.error(err)
+    }
+  }
 }
 
 export const accountService = new AccountService()
